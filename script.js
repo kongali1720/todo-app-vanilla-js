@@ -1,73 +1,87 @@
 const todoInput = document.getElementById('todo-input');
 const addBtn = document.getElementById('add-btn');
+const clearBtn = document.getElementById('clear-btn');
 const todoList = document.getElementById('todo-list');
 
-// Load todos dari localStorage pas halaman dibuka
-function loadTodos() {
-  const todos = JSON.parse(localStorage.getItem('todos')) || [];
-  todos.forEach(todo => {
-    createTodoElement(todo.text, todo.completed);
-  });
-}
+// Load from localStorage on page load
+window.onload = function() {
+  const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+  savedTodos.forEach(todo => addTodoToDOM(todo.text, todo.completed));
+};
 
-// Simpan todos ke localStorage
+// Save todos to localStorage
 function saveTodos() {
   const todos = [];
-  todoList.querySelectorAll('li').forEach(li => {
+  document.querySelectorAll('#todo-list li').forEach(li => {
     todos.push({
-      text: li.firstChild.textContent,
+      text: li.querySelector('.todo-text').textContent,
       completed: li.classList.contains('completed')
     });
   });
   localStorage.setItem('todos', JSON.stringify(todos));
 }
 
-// Buat elemen li baru dan append ke list
-function createTodoElement(text, completed = false) {
+// Add todo item to DOM
+function addTodoToDOM(text, completed = false) {
   const li = document.createElement('li');
-  li.textContent = text;
-  if (completed) li.classList.add('completed');
 
-  const deleteBtn = document.createElement('button');
-  deleteBtn.textContent = 'Hapus';
-  deleteBtn.className = 'delete-btn';
+  const span = document.createElement('span');
+  span.textContent = text;
+  span.classList.add('todo-text');
 
-  deleteBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    todoList.removeChild(li);
-    saveTodos();
-  });
+  if (completed) {
+    li.classList.add('completed');
+  }
 
-  li.addEventListener('click', () => {
+  li.appendChild(span);
+
+  // Delete button
+  const delBtn = document.createElement('button');
+  delBtn.textContent = 'Hapus';
+  delBtn.classList.add('delete-btn');
+  li.appendChild(delBtn);
+
+  // Toggle completed on clicking text
+  span.addEventListener('click', () => {
     li.classList.toggle('completed');
     saveTodos();
   });
 
-  li.appendChild(deleteBtn);
+  // Delete task on clicking delete button
+  delBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    li.remove();
+    saveTodos();
+  });
+
   todoList.appendChild(li);
-}
-
-// Tambah todo baru
-function addTodo() {
-  const taskText = todoInput.value.trim();
-  if (taskText === '') {
-    alert('Tolong isi tugasnya dulu ya!');
-    return;
-  }
-
-  createTodoElement(taskText);
-  todoInput.value = '';
-  todoInput.focus();
   saveTodos();
 }
 
-// Event klik tombol tambah
+// Add new todo from input
+function addTodo() {
+  const text = todoInput.value.trim();
+  if (text === '') {
+    alert('Tolong isi tugasnya dulu ya!');
+    return;
+  }
+  addTodoToDOM(text);
+  todoInput.value = '';
+  todoInput.focus();
+}
+
 addBtn.addEventListener('click', addTodo);
 
-// Event enter di input
-todoInput.addEventListener('keyup', (e) => {
-  if (e.key === 'Enter') addTodo();
+todoInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    addTodo();
+  }
 });
 
-// Load todos saat pertama kali
-loadTodos();
+// Clear all todos
+clearBtn.addEventListener('click', () => {
+  if (confirm('Yakin mau hapus semua tugas?')) {
+    todoList.innerHTML = '';
+    saveTodos();
+  }
+});
