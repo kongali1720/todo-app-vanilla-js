@@ -1,0 +1,55 @@
+cff-version: 1.2.0
+
+message: >
+  If you use this project in your research, educational materials,
+  or publications, please cite it using the metadata below.
+
+title: "todo-app-vanilla-js"
+
+type: software
+
+authors:
+  - family-names: "Kongali1720"
+    given-names: "Kong"
+
+repository-code: "https://github.com/kongali1720/todo-app-vanilla-js"
+
+url: "https://github.com/kongali1720/todo-app-vanilla-js"
+
+license: MIT
+
+version: "1.0.0"
+
+date-released: "2026-07-25"
+
+abstract: >
+  A simple and beginner-friendly To-Do List application built with
+  Vanilla JavaScript, HTML5, and CSS3.
+  Designed to demonstrate DOM manipulation, event handling,
+  and modern front-end development without frameworks.
+
+keywords:
+  - todo
+  - todo-list
+  - javascript
+  - vanilla-javascript
+  - html
+  - css
+  - frontend
+  - beginner
+  - dom
+  - web-development
+  - open-source
+  - productivity
+
+language: en
+
+preferred-citation:
+  type: software
+  authors:
+    - family-names: "Kongali1720"
+      given-names: "Kong"
+  title: "todo-app-vanilla-js"
+  version: "1.0.0"
+  date-released: "2026-07-25"
+  url: "https://github.com/kongali1720/todo-app-vanilla-js"
