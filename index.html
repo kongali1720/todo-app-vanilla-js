@@ -1,114 +1,451 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>✨ To-Do List Meriah ✨</title>
-  
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/dark.css" />
-  
-  <!-- Favicon -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ===== RESET & GLOBAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 550px;
+            width: 100%;
+            background: #1a1a1a;
+            padding: 30px 25px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+            border: 1px solid #333;
+        }
+
+        /* ===== HEADER ===== */
+        .header-img {
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #f7b731;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        h1 i {
+            color: #f7b731;
+        }
+
+        .subhead {
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        /* ===== INPUT ===== */
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            background: #222;
+            padding: 8px 12px;
+            border-radius: 60px;
+            border: 1px solid #444;
+        }
+
+        #todo-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 60px;
+            outline: none;
+            font-size: 1rem;
+            background: transparent;
+            color: #fff;
+            min-width: 120px;
+        }
+
+        #todo-input::placeholder {
+            color: #777;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #add-btn {
+            background: #f7b731;
+            color: #1a1a1a;
+        }
+
+        #add-btn:hover {
+            transform: scale(1.05);
+        }
+
+        #clear-btn {
+            background: #3a2a2a;
+            color: #e0b0a0;
+            border: 1px solid #5a3a3a;
+        }
+
+        #clear-btn:hover {
+            background: #4a3030;
+        }
+
+        /* ===== STATS ===== */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: #1a1a1a;
+            padding: 10px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+
+        .stats span {
+            color: #ccc;
+            font-size: 0.85rem;
+        }
+
+        .stats span i {
+            margin-right: 5px;
+        }
+
+        .stats .num {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* ===== TODO LIST ===== */
+        #todo-list {
+            list-style: none;
+            max-height: 340px;
+            overflow-y: auto;
+        }
+
+        #todo-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 60px;
+            margin-bottom: 8px;
+            transition: 0.2s;
+        }
+
+        #todo-list li:hover {
+            background: #2a2a2a;
+        }
+
+        #todo-list li span {
+            flex: 1;
+            cursor: pointer;
+            color: #eee;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #todo-list li span i {
+            font-size: 1.1rem;
+            color: #777;
+            width: 20px;
+        }
+
+        #todo-list li.completed span {
+            text-decoration: line-through;
+            color: #666;
+        }
+
+        #todo-list li.completed span i {
+            color: #4CAF50;
+        }
+
+        .delete-btn {
+            background: transparent;
+            border: none;
+            color: #bd6b4b;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: 40px;
+            transition: 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: #2a1a1a;
+            color: #ff6b4b;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 40px 10px;
+            color: #555;
+            border: 2px dashed #333;
+            border-radius: 60px;
+        }
+
+        .empty-message i {
+            font-size: 2.5rem;
+            color: #444;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        .footer i {
+            color: #ff6b6b;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 16px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .input-group {
+                flex-direction: column;
+                background: transparent;
+                border: none;
+                padding: 0;
+                gap: 8px;
+            }
+            #todo-input {
+                background: #1a1a1a;
+                border: 1px solid #333;
+                padding: 12px 16px;
+            }
+            .btn-group {
+                justify-content: center;
+            }
+            .stats {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .stats span {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
+    <div class="container">
 
-  <!-- HEADER DENGAN EFFECT GLOW -->
-  <div class="header-wrapper">
-    <p align="center">
-      <img src="https://raw.githubusercontent.com/kongali1720/KongWallet-Payment-Gateway-API/main/kop_surat.jpg" width="100%" class="header-img" alt="header">
-    </p>
-    
-    <!-- DECORATIVE ELEMENTS -->
-    <div class="header-decoration">
-      <span class="sparkle">✦</span>
-      <span class="sparkle">✦</span>
-      <span class="sparkle">✦</span>
+        <!-- HEADER -->
+        <p align="center">
+            <img src="https://raw.githubusercontent.com/kongali1720/KongWallet-Payment-Gateway-API/main/kop_surat.jpg" width="100%" class="header-img" alt="header">
+        </p>
+
+        <h1>
+            <i class="fas fa-list-check"></i> To-Do List
+        </h1>
+        <span class="subhead"><i class="fas fa-calendar-alt"></i> Yuk kelola tugas dengan gaya!</span>
+
+        <!-- INPUT -->
+        <div class="input-group">
+            <input type="text" id="todo-input" placeholder="Tulis tugas baru..." />
+            <div class="btn-group">
+                <button id="add-btn"><i class="fas fa-plus-circle"></i> Tambah</button>
+                <button id="clear-btn"><i class="fas fa-trash-alt"></i> Clear</button>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats">
+            <span><i class="fas fa-tasks"></i> Total: <span class="num" id="total-count">0</span></span>
+            <span><i class="fas fa-check-circle" style="color:#4CAF50;"></i> Selesai: <span class="num" id="done-count">0</span></span>
+            <span><i class="fas fa-clock" style="color:#FF9800;"></i> Pending: <span class="num" id="pending-count">0</span></span>
+        </div>
+
+        <!-- LIST -->
+        <ul id="todo-list"></ul>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            Made with <i class="fas fa-heart"></i> by <strong>Kongali1720</strong>
+        </div>
+
     </div>
-  </div>
 
-  <!-- TITLE DENGAN ANIMASI -->
-  <h1>
-    <i class="fas fa-list-check"></i> 
-    <span class="gradient-text">To-Do Meriah</span>
-    <i class="fas fa-star" style="color: #f1b24a; animation: spin 3s linear infinite;"></i>
-  </h1>
-  
-  <div style="text-align: center;">
-    <span class="subhead">
-      <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i> 
-      <span id="date-display"></span>
-    </span>
-  </div>
+    <!-- ===== JAVASCRIPT ===== -->
+    <script type="module">
+        // ===== STORAGE =====
+        const STORAGE_KEY = 'todos';
 
-  <!-- PROGRESS BAR -->
-  <div class="progress-wrapper">
-    <div class="progress-label">
-      <span>Progress</span>
-      <span id="progress-percent">0%</span>
-    </div>
-    <div class="progress-bar">
-      <div id="progress-fill" class="progress-fill" style="width: 0%;"></div>
-    </div>
-  </div>
+        function loadTodos() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                return data ? JSON.parse(data) : [];
+            } catch { return []; }
+        }
 
-  <!-- INPUT GROUP DENGAN ANIMASI -->
-  <div class="input-group">
-    <input type="text" id="todo-input" placeholder="✍️ Tulis tugas baru ..." />
-    <div class="btn-group">
-      <button id="add-btn" class="btn-primary">
-        <i class="fas fa-plus-circle"></i> Tambah
-      </button>
-      <button id="clear-btn" class="btn-danger">
-        <i class="fas fa-trash-alt"></i> Clear
-      </button>
-    </div>
-  </div>
+        function saveTodos(todos) {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+            } catch {}
+        }
 
-  <!-- STATISTIK DENGAN ICON BERGERAK -->
-  <div class="stats">
-    <span class="stat-item">
-      <i class="fas fa-tasks stat-icon"></i> 
-      Total: <span id="total-count" class="stat-number">0</span>
-    </span>
-    <span class="stat-item">
-      <i class="fas fa-check-circle stat-icon" style="color: #4CAF50;"></i> 
-      Selesai: <span id="done-count" class="stat-number">0</span>
-    </span>
-    <span class="stat-item">
-      <i class="fas fa-clock stat-icon" style="color: #FF9800;"></i> 
-      Pending: <span id="pending-count" class="stat-number">0</span>
-    </span>
-  </div>
+        // ===== STATE =====
+        let todos = loadTodos();
+        const todoInput = document.getElementById('todo-input');
+        const addBtn = document.getElementById('add-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const todoList = document.getElementById('todo-list');
+        const totalSpan = document.getElementById('total-count');
+        const doneSpan = document.getElementById('done-count');
+        const pendingSpan = document.getElementById('pending-count');
 
-  <!-- TODO LIST DENGAN ANIMASI -->
-  <ul id="todo-list"></ul>
+        // ===== RENDER =====
+        function render() {
+            todoList.innerHTML = '';
+            const total = todos.length;
+            const done = todos.filter(t => t.completed).length;
+            const pending = total - done;
 
-  <!-- FOOTER -->
-  <div class="footer">
-    <p>Made with <i class="fas fa-heart" style="color: #ff6b6b; animation: heartbeat 1.5s infinite;"></i> by <strong>Kongali1720</strong></p>
-    <p class="footer-small">✨ Scan like a ghost, strike like a hammer ✨</p>
-  </div>
-</div>
+            totalSpan.textContent = total;
+            doneSpan.textContent = done;
+            pendingSpan.textContent = pending;
 
-<!-- JavaScript Modules -->
-<script type="module" src="js/app.js"></script>
+            if (total === 0) {
+                todoList.innerHTML = `
+                    <div class="empty-message">
+                        <i class="fas fa-face-smile-wink"></i>
+                        Belum ada tugas, ayo tambahkan!
+                    </div>
+                `;
+                return;
+            }
 
-<!-- Tambahan script untuk date & progress -->
-<script>
-  // Display current date
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('date-display').textContent = new Date().toLocaleDateString('id-ID', options);
-</script>
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                if (todo.completed) li.classList.add('completed');
+
+                const span = document.createElement('span');
+                span.dataset.index = index;
+
+                const icon = document.createElement('i');
+                icon.className = todo.completed ? 'fas fa-check-circle' : 'far fa-circle';
+                span.appendChild(icon);
+
+                span.appendChild(document.createTextNode(' ' + todo.text));
+
+                const del = document.createElement('button');
+                del.className = 'delete-btn';
+                del.dataset.index = index;
+                del.innerHTML = '<i class="fas fa-trash-can"></i>';
+
+                li.appendChild(span);
+                li.appendChild(del);
+                todoList.appendChild(li);
+            });
+        }
+
+        // ===== CRUD =====
+        function addTodo() {
+            const text = todoInput.value.trim();
+            if (!text) return;
+            todos.push({ text, completed: false });
+            saveTodos(todos);
+            todoInput.value = '';
+            render();
+        }
+
+        function toggleTodo(index) {
+            todos[index].completed = !todos[index].completed;
+            saveTodos(todos);
+            render();
+        }
+
+        function deleteTodo(index) {
+            todos.splice(index, 1);
+            saveTodos(todos);
+            render();
+        }
+
+        function clearAll() {
+            if (todos.length === 0) return;
+            if (confirm('Hapus semua tugas?')) {
+                todos = [];
+                saveTodos(todos);
+                render();
+            }
+        }
+
+        // ===== EVENTS =====
+        addBtn.addEventListener('click', addTodo);
+        todoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addTodo();
+        });
+        clearBtn.addEventListener('click', clearAll);
+
+        todoList.addEventListener('click', (e) => {
+            const target = e.target.closest('span, .delete-btn');
+            if (!target) return;
+            const li = target.closest('li');
+            if (!li) return;
+            const index = parseInt(target.dataset.index);
+
+            if (target.tagName === 'SPAN') {
+                toggleTodo(index);
+            } else if (target.closest('.delete-btn')) {
+                deleteTodo(index);
+            }
+        });
+
+        // ===== START =====
+        render();
+    </script>
 
 </body>
 </html>
