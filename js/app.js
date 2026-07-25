@@ -1,16 +1,19 @@
 import { renderUI } from './ui.js';
 import { initEvents } from './events.js';
 import { loadTodos } from './storage.js';
+import { updateChart, updateFilters } from './utils.js';
 
 function initApp() {
-  loadTodos();
-  renderUI();
-  initEvents();
-  console.log('✨ To-Do List siap digunakan!');
+    loadTodos();
+    renderUI();
+    initEvents();
+    updateChart();
+    updateFilters();
+    console.log('✨ To-Do List Pro siap digunakan!');
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
+    document.addEventListener('DOMContentLoaded', initApp);
 } else {
-  initApp();
+    initApp();
 }
