@@ -1,0 +1,28 @@
+name: ✨ Feature Request
+description: Saran fitur baru untuk project ini
+title: "[FEATURE] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Deskripsi Fitur
+      description: Jelaskan fitur yang Anda inginkan
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Masalah yang Dipecahkan
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solusi yang Diusulkan
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioritas
+      options:
+        - High
+        - Medium
+        - Low
