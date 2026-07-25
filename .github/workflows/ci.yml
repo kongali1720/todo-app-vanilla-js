@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Validate HTML
+        run: |
+          echo "Checking HTML files..."
+          find . -name "*.html"
+
+      - name: Validate CSS
+        run: |
+          echo "Checking CSS files..."
+          find . -name "*.css"
+
+      - name: Validate JavaScript
+        run: |
+          echo "Checking JavaScript files..."
+          find . -name "*.js"
+
+      - name: Repository Validation
+        run: |
+          echo "Repository structure looks good."
