@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>To-Do List Pro</title>
+    <title>To-Do List</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#0d1117" />
 </head>
 <body>
 
@@ -18,76 +16,61 @@
             <img src="https://raw.githubusercontent.com/kongali1720/KongWallet-Payment-Gateway-API/main/kop_surat.jpg" width="100%" class="header-img" alt="header">
         </div>
 
-        <!-- TITLE - PUTIH CERAH -->
-        <div class="title-center">
-            <h1 class="main-title">
-                <i class="fas fa-list-check"></i> To-Do List Pro
-                <span class="badge-pro">PRO</span>
-            </h1>
-            <p class="subtitle-center">
-                <i class="fas fa-calendar-alt"></i> Yuk kelola tugas dengan gaya!
-            </p>
+        <!-- TITLE -->
+        <h1 class="title">📋 To-Do List</h1>
+        <p class="subtitle"><i class="fas fa-calendar-alt"></i> Yuk kelola tugas dengan gaya!</p>
+
+        <!-- JAM & TANGGAL -->
+        <div class="datetime">
+            <span><i class="fas fa-clock"></i> <span id="clock">00:00:00</span></span>
+            <span class="divider">|</span>
+            <span><i class="fas fa-calendar"></i> <span id="date">Loading...</span></span>
         </div>
 
-        <!-- JAM + KALENDER -->
-        <div class="datetime-wrapper">
-            <div class="datetime-item">
-                <i class="fas fa-clock"></i>
-                <span id="clock-display">00:00:00</span>
-            </div>
-            <div class="datetime-divider"></div>
-            <div class="datetime-item">
-                <i class="fas fa-calendar-day"></i>
-                <span id="date-display">Loading...</span>
-            </div>
+        <!-- FILTER -->
+        <div class="filter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
         </div>
 
-        <!-- FILTER - SEJAJAR 1 BARIS -->
-        <div class="filter-wrapper">
-            <button class="filter-btn active" data-filter="all">📋 All</button>
-            <button class="filter-btn" data-filter="active">⏳ Active</button>
-            <button class="filter-btn" data-filter="completed">✅ Completed</button>
-        </div>
-
-        <!-- PROGRESS CHART - BULAT DI TENGAH -->
-        <div class="chart-wrapper">
-            <div class="chart-ring">
-                <svg viewBox="0 0 120 120">
-                    <circle cx="60" cy="60" r="50" fill="none" stroke="#21262d" stroke-width="10"/>
-                    <circle cx="60" cy="60" r="50" fill="none" stroke="#f0883e" stroke-width="10"
+        <!-- PROGRESS -->
+        <div class="progress-wrapper">
+            <div class="progress-ring">
+                <svg width="80" height="80">
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#333" stroke-width="6"/>
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#f0883e" stroke-width="6"
                         stroke-linecap="round"
-                        stroke-dasharray="314.159"
-                        stroke-dashoffset="314.159"
-                        id="chart-circle"/>
+                        stroke-dasharray="188.5"
+                        stroke-dashoffset="188.5"
+                        id="progress-circle"/>
                 </svg>
-                <div class="chart-center">
-                    <span id="chart-percent">0%</span>
+                <div class="progress-label">
+                    <span id="progress-text">0%</span>
                     <small>Progress</small>
                 </div>
             </div>
-            <div class="chart-stats">
-                <div class="stat-row"><i class="fas fa-tasks"></i> Total: <strong id="total-count">0</strong></div>
-                <div class="stat-row"><i class="fas fa-check-circle" style="color:#3fb950;"></i> Selesai: <strong id="done-count">0</strong></div>
-                <div class="stat-row"><i class="fas fa-clock" style="color:#f0883e;"></i> Pending: <strong id="pending-count">0</strong></div>
+            <div class="stats">
+                <div>📊 Total: <strong id="total">0</strong></div>
+                <div>✅ Selesai: <strong id="done">0</strong></div>
+                <div>⏳ Pending: <strong id="pending">0</strong></div>
             </div>
         </div>
 
         <!-- INPUT -->
         <div class="input-group">
-            <input type="text" id="todo-input" placeholder="✍️ Tulis tugas baru..." />
-            <div class="input-row">
-                <select id="category-select">
-                    <option value="personal">👤 Personal</option>
-                    <option value="work">💼 Work</option>
-                    <option value="study">📚 Study</option>
-                    <option value="shopping">🛒 Shopping</option>
-                    <option value="other">📌 Other</option>
-                </select>
-                <input type="date" id="deadline-input" />
-                <div class="btn-group">
-                    <button id="add-btn"><i class="fas fa-plus-circle"></i> Tambah</button>
-                    <button id="clear-btn"><i class="fas fa-trash-alt"></i> Clear</button>
-                </div>
+            <input type="text" id="todo-input" placeholder="Tulis tugas baru..." />
+            <select id="category-select">
+                <option value="personal">👤 Personal</option>
+                <option value="work">💼 Work</option>
+                <option value="study">📚 Study</option>
+                <option value="shopping">🛒 Shopping</option>
+                <option value="other">📌 Other</option>
+            </select>
+            <input type="date" id="deadline-input" />
+            <div class="btn-group">
+                <button id="add-btn"><i class="fas fa-plus"></i> Tambah</button>
+                <button id="clear-btn"><i class="fas fa-trash"></i> Clear</button>
             </div>
         </div>
 
@@ -96,19 +79,10 @@
 
         <!-- FOOTER -->
         <div class="footer">
-            Made with <i class="fas fa-heart"></i> by <strong>Kongali1720</strong>
-            <span class="version">v2.0</span>
+            ❤️ by <strong>Kongali1720</strong>
         </div>
 
     </div>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
-                .then(() => console.log('✅ Service Worker registered'))
-                .catch(() => console.log('⚠️ SW registration failed'));
-        }
-    </script>
 
     <script type="module" src="js/app.js"></script>
 </body>

@@ -2,89 +2,43 @@ import { loadTodos, saveTodos } from './storage.js';
 import { generateID } from './utils.js';
 
 let todos = loadTodos();
-let currentFilter = 'all';
+let filter = 'all';
 
 export function getTodos() {
+    if (filter === 'all') return [...todos];
+    if (filter === 'active') return todos.filter(t => !t.done);
+    if (filter === 'completed') return todos.filter(t => t.done);
     return [...todos];
 }
 
-export function getFilteredTodos() {
-    if (currentFilter === 'all') return [...todos];
-    if (currentFilter === 'active') return todos.filter(t => !t.completed);
-    if (currentFilter === 'completed') return todos.filter(t => t.completed);
-    return [...todos];
-}
-
-export function setFilter(filter) {
-    currentFilter = filter;
-}
-
-export function getCurrentFilter() {
-    return currentFilter;
-}
-
-export function getTodoStats() {
+export function getStats() {
     const total = todos.length;
-    const completed = todos.filter(t => t.completed).length;
-    return { total, completed, pending: total - completed };
+    const done = todos.filter(t => t.done).length;
+    return { total, done, pending: total - done };
 }
+
+export function setFilter(f) { filter = f; }
 
 export function addTodo(text, category = 'personal', deadline = '') {
-    const newTodo = {
-        id: generateID(),
-        text: text.trim(),
-        category,
-        deadline,
-        completed: false,
-        createdAt: new Date().toISOString()
-    };
-    todos.push(newTodo);
+    const todo = { id: generateID(), text: text.trim(), category, deadline, done: false };
+    todos.push(todo);
     saveTodos(todos);
-    return newTodo;
+    return todo;
 }
 
 export function toggleTodo(id) {
     const todo = todos.find(t => t.id === id);
-    if (todo) {
-        todo.completed = !todo.completed;
-        saveTodos(todos);
-    }
+    if (todo) { todo.done = !todo.done; saveTodos(todos); }
     return todo;
 }
 
 export function deleteTodo(id) {
-    const index = todos.findIndex(t => t.id === id);
-    if (index !== -1) {
-        todos.splice(index, 1);
-        saveTodos(todos);
-        return true;
-    }
-    return false;
+    todos = todos.filter(t => t.id !== id);
+    saveTodos(todos);
 }
 
-export function updateTodoText(id, newText) {
-    const todo = todos.find(t => t.id === id);
-    if (todo && newText.trim()) {
-        todo.text = newText.trim();
-        saveTodos(todos);
-    }
-    return todo;
-}
-
-export function clearAllTodos(confirmDelete = true) {
-    if (confirmDelete && !window.confirm('🧹 Hapus semua tugas?')) {
-        return false;
-    }
+export function clearAll() {
+    if (!confirm('Hapus semua?')) return;
     todos = [];
     saveTodos(todos);
-    return true;
-}
-
-export function reorderTodos(newOrder) {
-    todos = newOrder;
-    saveTodos(todos);
-}
-
-export function getTodo(id) {
-    return todos.find(t => t.id === id) || null;
 }
