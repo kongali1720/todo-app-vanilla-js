@@ -19,17 +19,15 @@ body {
     max-width: 620px;
     width: 100%;
     background: #161b22;
-    padding: 30px 26px;
+    padding: 28px 24px;
     border-radius: 28px;
     border: 1px solid #30363d;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
-    text-align: center;
 }
 
-/* ===== HEADER CENTER ===== */
+/* ===== HEADER ===== */
 .header-center {
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
 
 .header-img {
@@ -40,27 +38,22 @@ body {
     border: 2px solid #f0883e;
 }
 
-/* ===== TITLE CENTER ===== */
+/* ===== TITLE ===== */
 .title-center {
     text-align: center;
     margin-bottom: 14px;
 }
 
 .main-title {
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 800;
     color: #fff;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(135deg, #f0883e, #f7b731);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .main-title i {
-    -webkit-text-fill-color: initial;
     color: #f0883e;
 }
 
@@ -71,8 +64,6 @@ body {
     padding: 2px 14px;
     border-radius: 20px;
     font-weight: 700;
-    letter-spacing: 0.5px;
-    -webkit-text-fill-color: initial;
 }
 
 .subtitle-center {
@@ -90,33 +81,39 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
     background: #0d1117;
-    padding: 12px 20px;
+    padding: 10px 24px;
     border-radius: 60px;
     margin-bottom: 18px;
     border: 1px solid #21262d;
-    flex-wrap: wrap;
 }
 
-.clock-box,
-.date-box {
+.datetime-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     color: #f0f6fc;
 }
 
-.clock-box i {
-    color: #f0883e;
+.datetime-item i {
     font-size: 16px;
 }
 
-.date-box i {
+.datetime-item i.fa-clock {
+    color: #f0883e;
+}
+
+.datetime-item i.fa-calendar-day {
     color: #3fb950;
-    font-size: 16px;
+}
+
+.datetime-divider {
+    width: 1px;
+    height: 20px;
+    background: #30363d;
 }
 
 #clock-display {
@@ -124,7 +121,7 @@ body {
     font-weight: 700;
     font-size: 18px;
     color: #f0883e;
-    min-width: 80px;
+    min-width: 75px;
 }
 
 #date-display {
@@ -218,7 +215,12 @@ body {
     gap: 4px;
     font-size: 13px;
     color: #8b949e;
-    text-align: left;
+}
+
+.chart-stats .stat-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .chart-stats strong {
@@ -228,40 +230,53 @@ body {
 /* ===== INPUT ===== */
 .input-group {
     display: flex;
+    flex-direction: column;
     gap: 8px;
     margin-bottom: 18px;
-    flex-wrap: wrap;
-    background: #0d1117;
-    padding: 10px 14px;
-    border-radius: 16px;
-    border: 1px solid #30363d;
-    text-align: left;
 }
 
 #todo-input {
-    flex: 2;
-    padding: 10px 14px;
-    border: none;
-    outline: none;
-    background: transparent;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid #30363d;
+    background: #0d1117;
     color: #f0f6fc;
-    font-size: 14px;
-    min-width: 120px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+#todo-input:focus {
+    border-color: #f0883e;
 }
 
 #todo-input::placeholder {
     color: #484f58;
 }
 
+.input-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
 #category-select,
 #deadline-input {
-    padding: 8px 12px;
-    border-radius: 8px;
+    flex: 1;
+    min-width: 100px;
+    padding: 10px 12px;
+    border-radius: 10px;
     border: 1px solid #30363d;
-    background: #161b22;
+    background: #0d1117;
     color: #f0f6fc;
     font-size: 13px;
     outline: none;
+}
+
+#category-select:focus,
+#deadline-input:focus {
+    border-color: #f0883e;
 }
 
 #category-select option {
@@ -274,16 +289,16 @@ body {
 }
 
 button {
-    padding: 8px 16px;
+    padding: 10px 18px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
     font-size: 13px;
     transition: 0.2s;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
 }
 
 #add-btn {
@@ -311,7 +326,6 @@ button {
     list-style: none;
     max-height: 380px;
     overflow-y: auto;
-    text-align: left;
 }
 
 #todo-list::-webkit-scrollbar {
@@ -389,17 +403,17 @@ button {
     flex-wrap: wrap;
 }
 
-#todo-list li .todo-meta .category {
+#todo-list li .todo-meta .category-tag {
     padding: 1px 12px;
     border-radius: 10px;
     background: #21262d;
 }
 
-#todo-list li .todo-meta .deadline {
+#todo-list li .todo-meta .deadline-tag {
     color: #f0883e;
 }
 
-#todo-list li .todo-meta .deadline.overdue {
+#todo-list li .todo-meta .deadline-tag.overdue {
     color: #f85149;
 }
 
@@ -491,30 +505,25 @@ button {
 }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 480px) {
+@media (max-width: 520px) {
     .container { padding: 16px; }
     .main-title { font-size: 22px; }
     .datetime-wrapper {
-        flex-direction: column;
-        gap: 6px;
+        flex-wrap: wrap;
+        gap: 8px;
         padding: 10px 16px;
         border-radius: 30px;
     }
-    .input-group {
+    .datetime-divider {
+        display: none;
+    }
+    .input-row {
         flex-direction: column;
-        background: transparent;
-        border: none;
-        padding: 0;
-        gap: 8px;
     }
-    #todo-input {
-        background: #0d1117;
-        border: 1px solid #21262d;
-        border-radius: 8px;
-        padding: 10px 14px;
-    }
-    #category-select, #deadline-input {
+    #category-select,
+    #deadline-input {
         width: 100%;
+        min-width: unset;
     }
     .btn-group {
         justify-content: center;
@@ -534,8 +543,5 @@ button {
     .filter-btn {
         font-size: 12px;
         padding: 4px 12px;
-    }
-    #todo-list li .todo-meta {
-        flex-wrap: wrap;
     }
 }

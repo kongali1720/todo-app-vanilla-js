@@ -31,11 +31,12 @@
 
         <!-- JAM + KALENDER -->
         <div class="datetime-wrapper">
-            <div class="clock-box">
+            <div class="datetime-item">
                 <i class="fas fa-clock"></i>
                 <span id="clock-display">00:00:00</span>
             </div>
-            <div class="date-box">
+            <div class="datetime-divider"></div>
+            <div class="datetime-item">
                 <i class="fas fa-calendar-day"></i>
                 <span id="date-display">Loading...</span>
             </div>
@@ -65,26 +66,28 @@
                 </div>
             </div>
             <div class="chart-stats">
-                <span><i class="fas fa-tasks"></i> Total: <strong id="total-count">0</strong></span>
-                <span><i class="fas fa-check-circle" style="color:#3fb950;"></i> Selesai: <strong id="done-count">0</strong></span>
-                <span><i class="fas fa-clock" style="color:#f0883e;"></i> Pending: <strong id="pending-count">0</strong></span>
+                <div class="stat-row"><i class="fas fa-tasks"></i> Total: <strong id="total-count">0</strong></div>
+                <div class="stat-row"><i class="fas fa-check-circle" style="color:#3fb950;"></i> Selesai: <strong id="done-count">0</strong></div>
+                <div class="stat-row"><i class="fas fa-clock" style="color:#f0883e;"></i> Pending: <strong id="pending-count">0</strong></div>
             </div>
         </div>
 
         <!-- INPUT -->
         <div class="input-group">
             <input type="text" id="todo-input" placeholder="✍️ Tulis tugas baru..." />
-            <select id="category-select">
-                <option value="personal">👤 Personal</option>
-                <option value="work">💼 Work</option>
-                <option value="study">📚 Study</option>
-                <option value="shopping">🛒 Shopping</option>
-                <option value="other">📌 Other</option>
-            </select>
-            <input type="date" id="deadline-input" />
-            <div class="btn-group">
-                <button id="add-btn"><i class="fas fa-plus-circle"></i> Tambah</button>
-                <button id="clear-btn"><i class="fas fa-trash-alt"></i> Clear</button>
+            <div class="input-row">
+                <select id="category-select">
+                    <option value="personal">👤 Personal</option>
+                    <option value="work">💼 Work</option>
+                    <option value="study">📚 Study</option>
+                    <option value="shopping">🛒 Shopping</option>
+                    <option value="other">📌 Other</option>
+                </select>
+                <input type="date" id="deadline-input" />
+                <div class="btn-group">
+                    <button id="add-btn"><i class="fas fa-plus-circle"></i> Tambah</button>
+                    <button id="clear-btn"><i class="fas fa-trash-alt"></i> Clear</button>
+                </div>
             </div>
         </div>
 
@@ -99,7 +102,6 @@
 
     </div>
 
-    <!-- Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
