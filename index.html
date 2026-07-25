@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+        body{background:#0d1117;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+        .container{max-width:520px;width:100%;background:#161b22;padding:28px 24px;border-radius:24px;border:1px solid #30363d;box-shadow:0 25px 50px -12px rgba(0,0,0,0.9);text-align:center}
+        .header-img{width:100%;border-radius:16px;margin-bottom:16px;border:2px solid #f0883e}
+        .title{font-size:28px;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+        .title i{color:#f0883e}
+        .badge{font-size:11px;background:linear-gradient(135deg,#f0883e,#f7b731);color:#0d1117;padding:2px 14px;border-radius:20px;font-weight:700}
+        .subtitle{color:#8b949e;font-size:14px;margin:4px 0 16px}
+        .subtitle i{color:#f0883e}
+        .datetime{display:flex;justify-content:center;align-items:center;gap:16px;background:#0d1117;padding:10px 20px;border-radius:40px;margin-bottom:16px;border:1px solid #21262d;color:#f0f6fc;font-size:14px;flex-wrap:wrap}
+        .datetime i{color:#f0883e}
+        .datetime .divider{color:#30363d}
+        #clock{font-weight:700;color:#f0883e;font-family:monospace;font-size:17px}
+        #date{color:#8b949e}
+        .filter{display:flex;justify-content:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+        .filter-btn{padding:6px 20px;border:1px solid #30363d;border-radius:20px;background:transparent;color:#8b949e;cursor:pointer;font-size:13px;font-weight:500;transition:0.3s}
+        .filter-btn:hover{border-color:#f0883e;color:#fff}
+        .filter-btn.active{background:#f0883e;color:#0d1117;border-color:#f0883e;font-weight:600}
+        .progress-wrapper{display:flex;align-items:center;justify-content:center;gap:30px;background:#0d1117;padding:16px 20px;border-radius:16px;margin-bottom:16px;border:1px solid #21262d;flex-wrap:wrap}
+        .progress-ring{position:relative;width:90px;height:90px;flex-shrink:0}
+        .progress-ring svg{transform:rotate(-90deg)}
+        .progress-ring circle{transition:stroke-dashoffset 0.8s ease}
+        .progress-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff}
+        .progress-label span{font-size:20px;font-weight:700}
+        .progress-label small{font-size:10px;color:#8b949e}
+        .stats{display:flex;flex-direction:column;gap:4px;font-size:13px;color:#8b949e;text-align:left}
+        .stats .row{display:flex;align-items:center;gap:6px}
+        .stats strong{color:#fff}
+        .input-group{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+        #todo-input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid #30363d;background:#0d1117;color:#f0f6fc;font-size:15px;outline:none;transition:0.3s}
+        #todo-input:focus{border-color:#f0883e}
+        #todo-input::placeholder{color:#484f58}
+        .input-row{display:flex;gap:10px;flex-wrap:wrap}
+        .input-row select,.input-row input[type="date"]{flex:1;min-width:100px;padding:10px 12px;border-radius:10px;border:1px solid #30363d;background:#0d1117;color:#f0f6fc;font-size:13px;outline:none}
+        .input-row select:focus,.input-row input[type="date"]:focus{border-color:#f0883e}
+        .input-row select option{background:#161b22}
+        .btn-group{display:flex;gap:8px;justify-content:center}
+        button{padding:10px 20px;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:13px;transition:0.2s;display:flex;align-items:center;gap:6px}
+        #add-btn{background:#f0883e;color:#0d1117}
+        #add-btn:hover{background:#f6994f;transform:scale(1.02)}
+        #clear-btn{background:#21262d;color:#f0f6fc;border:1px solid #30363d}
+        #clear-btn:hover{background:#30363d}
+        #todo-list{list-style:none;max-height:320px;overflow-y:auto;text-align:left}
+        #todo-list::-webkit-scrollbar{width:5px}
+        #todo-list::-webkit-scrollbar-track{background:#0d1117;border-radius:10px}
+        #todo-list::-webkit-scrollbar-thumb{background:#30363d;border-radius:10px}
+        #todo-list li{display:flex;flex-direction:column;padding:12px 16px;background:#0d1117;border:1px solid #21262d;border-radius:12px;margin-bottom:6px;transition:0.3s}
+        #todo-list li:hover{border-color:#30363d;background:#161b22}
+        #todo-list li .row{display:flex;justify-content:space-between;align-items:center}
+        #todo-list li .row span{flex:1;cursor:pointer;color:#f0f6fc;font-size:15px;display:flex;align-items:center;gap:10px}
+        #todo-list li .row span i{font-size:16px;color:#484f58;width:18px}
+        #todo-list li.completed .row span{text-decoration:line-through;color:#484f58}
+        #todo-list li.completed .row span i{color:#3fb950}
+        #todo-list li .meta{display:flex;gap:12px;font-size:11px;color:#8b949e;margin-left:34px;margin-top:4px;flex-wrap:wrap}
+        .delete-btn{background:transparent;border:none;color:#484f58;cursor:pointer;padding:4px 10px;border-radius:8px;transition:0.2s}
+        .delete-btn:hover{background:#21262d;color:#f85149}
+        .empty{text-align:center;padding:30px 10px;color:#484f58}
+        .empty i{font-size:32px;color:#21262d;display:block;margin-bottom:8px}
+        .footer{text-align:center;margin-top:16px;padding-top:12px;border-top:1px solid #21262d;color:#484f58;font-size:12px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}
+        .footer i{color:#f85149}
+        .footer .version{color:#30363d;font-size:10px}
+        @media(max-width:480px){.container{padding:16px}.title{font-size:22px}.input-row{flex-direction:column}.input-row select,.input-row input[type="date"]{width:100%;min-width:unset}.btn-group{justify-content:center}.progress-wrapper{flex-direction:column;align-items:center}.stats{flex-direction:row;flex-wrap:wrap;justify-content:center;text-align:center}.filter{gap:4px}.filter-btn{font-size:12px;padding:4px 12px}.datetime{font-size:12px;padding:8px 14px;gap:8px}#clock{font-size:14px}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://raw.githubusercontent.com/kongali1720/KongWallet-Payment-Gateway-API/main/kop_surat.jpg" width="100%" class="header-img" alt="header">
+        <div class="title"><i class="fas fa-list-check"></i> To-Do List Pro <span class="badge">PRO</span></div>
+        <p class="subtitle"><i class="fas fa-calendar-alt"></i> Yuk kelola tugas dengan gaya!</p>
+        <div class="datetime"><i class="fas fa-clock"></i> <span id="clock">00:00:00</span> <span class="divider">|</span> <i class="fas fa-calendar-day"></i> <span id="date">Loading...</span></div>
+        <div class="filter">
+            <button class="filter-btn active" data-filter="all">📋 All</button>
+            <button class="filter-btn" data-filter="active">⏳ Active</button>
+            <button class="filter-btn" data-filter="completed">✅ Completed</button>
+        </div>
+        <div class="progress-wrapper">
+            <div class="progress-ring">
+                <svg width="90" height="90">
+                    <circle cx="45" cy="45" r="35" fill="none" stroke="#21262d" stroke-width="8"/>
+                    <circle cx="45" cy="45" r="35" fill="none" stroke="#f0883e" stroke-width="8" stroke-linecap="round" stroke-dasharray="219.9" stroke-dashoffset="219.9" id="progress-circle"/>
+                </svg>
+                <div class="progress-label"><span id="progress-text">0%</span> <small>Progress</small></div>
+            </div>
+            <div class="stats">
+                <div class="row"><i class="fas fa-tasks"></i> Total: <strong id="total">0</strong></div>
+                <div class="row"><i class="fas fa-check-circle" style="color:#3fb950;"></i> Selesai: <strong id="done">0</strong></div>
+                <div class="row"><i class="fas fa-clock" style="color:#f0883e;"></i> Pending: <strong id="pending">0</strong></div>
+            </div>
+        </div>
+        <div class="input-group">
+            <input type="text" id="todo-input" placeholder="✍️ Tulis tugas baru..." />
+            <div class="input-row">
+                <select id="category-select">
+                    <option value="personal">👤 Personal</option>
+                    <option value="work">💼 Work</option>
+                    <option value="study">📚 Study</option>
+                    <option value="shopping">🛒 Shopping</option>
+                    <option value="other">📌 Other</option>
+                </select>
+                <input type="date" id="deadline-input" />
+                <div class="btn-group">
+                    <button id="add-btn"><i class="fas fa-plus-circle"></i> Tambah</button>
+                    <button id="clear-btn"><i class="fas fa-trash-alt"></i> Clear</button>
+                </div>
+            </div>
+        </div>
+        <ul id="todo-list"><li class="empty"><i class="fas fa-face-smile-wink"></i> Belum ada tugas, ayo tambahkan!</li></ul>
+        <div class="footer">Made with <i class="fas fa-heart"></i> by <strong>Kongali1720</strong> <span class="version">v2.0</span></div>
+    </div>
+    <script>
+        const KEY='todos';let todos=JSON.parse(localStorage.getItem(KEY))||[];let filter='all';
+        function save(){localStorage.setItem(KEY,JSON.stringify(todos));}
+        function render(){let data=todos;if(filter==='active')data=todos.filter(t=>!t.done);if(filter==='completed')data=todos.filter(t=>t.done);const list=document.getElementById('todo-list');list.innerHTML='';if(data.length===0){list.innerHTML='<li class="empty"><i class="fas fa-face-smile-wink"></i> Belum ada tugas, ayo tambahkan!</li>';}else{data.forEach((todo,index)=>{const li=document.createElement('li');if(todo.done)li.classList.add('completed');const row=document.createElement('div');row.className='row';const span=document.createElement('span');span.innerHTML=(todo.done?'✅ ':'⬜ ')+todo.text;span.style.color=todo.done?'#484f58':'#f0f6fc';span.style.textDecoration=todo.done?'line-through':'none';span.onclick=()=>{todo.done=!todo.done;save();render();};const del=document.createElement('button');del.className='delete-btn';del.innerHTML='<i class="fas fa-trash"></i>';del.onclick=()=>{todos.splice(index,1);save();render();};row.appendChild(span);row.appendChild(del);const meta=document.createElement('div');meta.className='meta';if(todo.category){const c=document.createElement('span');c.textContent='🏷️ '+todo.category;meta.appendChild(c);}if(todo.deadline){const d=document.createElement('span');d.textContent='📅 '+new Date(todo.deadline).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});meta.appendChild(d);}li.appendChild(row);if(meta.children.length>0)li.appendChild(meta);list.appendChild(li);});}const total=todos.length;const done=todos.filter(t=>t.done).length;document.getElementById('total').textContent=total;document.getElementById('done').textContent=done;document.getElementById('pending').textContent=total-done;const pct=total===0?0:Math.round((done/total)*100);document.getElementById('progress-text').textContent=pct+'%';const circle=document.getElementById('progress-circle');if(circle){const circumference=219.9;circle.style.strokeDashoffset=circumference-(pct/100)*circumference;}}
+        document.getElementById('add-btn').onclick=()=>{const input=document.getElementById('todo-input');const text=input.value.trim();if(!text)return;const category=document.getElementById('category-select').value;const deadline=document.getElementById('deadline-input').value;todos.push({text,category,deadline,done:false});save();input.value='';document.getElementById('deadline-input').value='';render();};
+        document.getElementById('clear-btn').onclick=()=>{if(confirm('Hapus semua tugas?')){todos=[];save();render();}};
+        document.querySelectorAll('.filter-btn').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');filter=btn.dataset.filter;render();};});
+        document.getElementById('todo-input').onkeypress=(e)=>{if(e.key==='Enter')document.getElementById('add-btn').click();};
+        function updateClock(){const now=new Date();document.getElementById('clock').textContent=now.toTimeString().slice(0,8);}
+        updateClock();setInterval(updateClock,1000);
+        document.getElementById('date').textContent=new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+        render();
+    </script>
+</body>
+</html>
