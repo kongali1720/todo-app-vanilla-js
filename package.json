@@ -1,0 +1,33 @@
+{
+  "name": "todo-app-vanilla-js",
+  "version": "1.0.0",
+  "description": "✨ To-Do List dengan Vanilla JavaScript",
+  "author": "Kongali1720",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "keywords": ["todo", "javascript", "vanilla", "html", "css"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kongali1720/todo-app-vanilla-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kongali1720/todo-app-vanilla-js/issues"
+  },
+  "homepage": "https://github.com/kongali1720/todo-app-vanilla-js",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.34.0",
+    "eslint": "^9.34.0",
+    "prettier": "^3.6.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
