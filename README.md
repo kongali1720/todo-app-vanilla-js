@@ -69,11 +69,11 @@ cd todo-app-vanilla-js
 Buka file menggunakan browser:
 
 ```bash
-# Windows
-start index.html
+# Buka folder di Windows Explorer, lalu klik 2x index.html
+explorer.exe .
 
-# macOS
-open index.html
+# Buka Chrome/Edge default Windows
+cmd.exe /c start index.html
 
 # Linux
 xdg-open index.html
