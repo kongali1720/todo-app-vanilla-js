@@ -1,0 +1,10 @@
+blank_issues_enabled: true
+
+contact_links:
+  - name: Documentation
+    url: https://github.com/kongali1720/todo-app-vanilla-js#readme
+    about: Please read the documentation before opening an issue.
+
+  - name: Security Policy
+    url: https://github.com/kongali1720/todo-app-vanilla-js/blob/main/SECURITY.md
+    about: Please report security vulnerabilities privately.
