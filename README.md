@@ -23,6 +23,7 @@ Cocok buat latihan dasar DOM manipulation dan event handling.
 
 <p align="center">
   <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnJ6b2hmbTRuNW9tZnBrdzZlNmxmY2x3ODZneHU2bXM5amNqczNycyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/fLM8udn4VFavIAxsTW/giphy.gif" width="300"/>
+</p>
 
 ---
 
@@ -67,7 +68,7 @@ Panduan ini dibuat untuk edukasi dan meningkatkan kesadaran keamanan digital. Gu
 
 <div align="center">
   
-## 🤝 Kontribusi
+# 🤝 Kontribusi
 
 Pull request dan issue sangat diterima!  
 Pull requests and issues are very welcome!  
@@ -81,7 +82,7 @@ Stars ⭐ also boost motivation to add new features! 💪
 
 <div align="center">
   
-## ❤️ Special Thanks
+# ❤️ Special Thanks
 
 Made with 🔥 by KONGALI1720 Cyber Force.  
 
@@ -91,72 +92,16 @@ Made with 🔥 by KONGALI1720 Cyber Force.
 
 ---
 
-<div align="center">
-  
-## ✅ Gaspol coding squad Indonesia! 🚀💻
-
- Halo, Sobat Koding!  
- Hey, Coding Friends!
-
- Kumpulan mini project Python yang gak bikin ngantuk!  
- Collection of Python mini projects that won’t bore you!
-
- Belajar sambil praktek langsung, cocok buat yang suka action daripada teori.  
- Learn by doing, perfect for those who prefer action over theory.
-
-Langsung eksekusi, langsung paham.  
-Run it directly, understand instantly.
-
-</div>
-
----
-
 <h3 align="center">💡 ☕ Traktir Kopi & Nasi Padang ama nasi Gorengnya ya cuy! 😄</h3>
 
 <div align="center">
 
-## Dukung terus biar semangat bikin karya edukatif lainnya...  
-## Keep supporting so I stay motivated to create more educational works...
+# Dukung terus biar semangat bikin karya edukatif lainnya...  
+# Keep supporting so I stay motivated to create more educational works...
 
 # 💡 ☕  [Buy Me a Coffee via PayPal](https://www.paypal.com/paypalme/bungtempong99)  
 
 Support with ☕ so I can buy 🍜 and keep being 🧠!
-
----
-
-<h2>📫 Let’s Connect Like Hackers</h2>
-
-| Platform | Detail |
-|:--------|:-------|
-| GitHub  | [kongali1720](https://github.com/kongali1720) |
-| Email   | [kongali1720@gmail.com](mailto:kongali1720@gmail.com) |
-| Site    | [Coming soon — stay curious... ](https://kongali1720.github.io) |
-
----
-
-## ❤️  💻 INITIATING HUMANITY MODE... for Down Syndrome ❤️
-
-| Item        | Keterangan / Description |
-|:------------|:-------------------------|
-| 🎯 Target   | Anak-anak Pejuang Down Syndrome / Kids with Down Syndrome |
-| 📡 Status   | Butuh Dukungan / Needs Support |
-| 🧠 Response | Buka Hati + Klik Link = Satu Senyum Baru / Open Heart + Click Link = One New Smile |
-
-Mereka bukan berbeda — mereka dilahirkan untuk mengajarkan dunia tentang cinta yang murni dan kesabaran yang luar biasa.  
-They are not different — they were born to teach the world pure love and extraordinary patience.
-
-<p align="center" style="font-size: 1.5rem;">
-  <a href="https://mydonation4ds.github.io/" target="_blank" style="display: inline-block;">
-    <img 
-      src="https://img.shields.io/badge/SUPPORT--NOW-%23FF6600?style=for-the-badge&logo=heart&logoColor=white&labelColor=white&color=FF6600" 
-      alt="Support Now" 
-      style="width: 300px; height: auto;" 
-    />
-  </a>
-</p>
-
-</div>
-
 
 ---
 
@@ -175,7 +120,7 @@ They are not different — they were born to teach the world pure love and extra
   <tbody style="background-color: #f9f9f9;">
     <tr>
       <td style="padding: 15px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Visa_Logo.png/120px-Visa_Logo.png" alt="Logo Visa" width="110" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Visa_Inc._logo_%282021%E2%80%93present%29.svg" alt="Logo Visa" width="110" />
       </td>
       <td style="padding: 15px;">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/120px-Mastercard-logo.svg.png" alt="Logo Mastercard" width="110" />
@@ -188,7 +133,6 @@ They are not different — they were born to teach the world pure love and extra
 </table>
 
 </section>
-
 
 ---
 
