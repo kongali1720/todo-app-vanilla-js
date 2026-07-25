@@ -1,0 +1,72 @@
+# =====================================================
+# CODEOWNERS
+# =====================================================
+#
+# This file defines the default code owners for this
+# repository.
+#
+# GitHub will automatically request reviews from the
+# specified code owners when Pull Requests are opened.
+#
+# Documentation:
+# https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# =====================================================
+
+# Default owner for the entire repository
+* @kongali1720
+
+# =====================================================
+# Documentation
+# =====================================================
+
+README.md                 @kongali1720
+LICENSE                   @kongali1720
+CHANGELOG.md              @kongali1720
+CONTRIBUTING.md           @kongali1720
+CODE_OF_CONDUCT.md        @kongali1720
+SECURITY.md               @kongali1720
+SUPPORT.md                @kongali1720
+ROADMAP.md                @kongali1720
+GOVERNANCE.md             @kongali1720
+
+# =====================================================
+# GitHub Configuration
+# =====================================================
+
+.github/                  @kongali1720
+
+# GitHub Workflows
+.github/workflows/        @kongali1720
+
+# Issue Templates
+.github/ISSUE_TEMPLATE/   @kongali1720
+
+# Pull Request Template
+.github/pull_request_template.md @kongali1720
+
+# =====================================================
+# Source Code
+# =====================================================
+
+*.html                    @kongali1720
+*.css                     @kongali1720
+*.js                      @kongali1720
+
+# Future directories
+css/                      @kongali1720
+js/                       @kongali1720
+assets/                   @kongali1720
+
+# =====================================================
+# Configuration Files
+# =====================================================
+
+package.json              @kongali1720
+.editorconfig             @kongali1720
+.prettierrc               @kongali1720
+eslint.config.js          @kongali1720
+
+# =====================================================
+# End of File
+# =====================================================
