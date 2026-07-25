@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>✨ To-Do List Meriah ✨</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dark.css" />
+</head>
+<body>
+<div class="container">
+  <p align="center">
+    <img src="https://raw.githubusercontent.com/kongali1720/KongWallet-Payment-Gateway-API/main/kop_surat.jpg" width="100%" class="header-img" alt="header">
+  </p>
+  <h1><i class="fas fa-list-check"></i> To-Do Meriah <i class="fas fa-star" style="color: #f1b24a;"></i></h1>
+  <div style="text-align: center;">
+    <span class="subhead"><i class="fas fa-calendar-alt" style="margin-right: 8px;"></i> Yuk kelola tugas dengan gaya!</span>
+  </div>
+  <div class="input-group">
+    <input type="text" id="todo-input" placeholder="Tulis tugas baru ..." />
+    <div class="btn-group">
+      <button id="add-btn"><i class="fas fa-plus-circle"></i> Tambah</button>
+      <button id="clear-btn"><i class="fas fa-trash-alt"></i> Clear</button>
+    </div>
+  </div>
+  <div class="stats">
+    <span><i class="fas fa-tasks" style="margin-right: 6px; color:#cb8b4b;"></i> Total: <span id="total-count">0</span></span>
+    <span><i class="fas fa-check-circle" style="margin-right: 6px; color:#3d8b3d;"></i> Selesai: <span id="done-count">0</span></span>
+  </div>
+  <ul id="todo-list"></ul>
+</div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
