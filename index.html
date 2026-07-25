@@ -4,32 +4,111 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>✨ To-Do List Meriah ✨</title>
+  
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/dark.css" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+
 <div class="container">
-  <p align="center">
-    <img src="https://raw.githubusercontent.com/kongali1720/KongWallet-Payment-Gateway-API/main/kop_surat.jpg" width="100%" class="header-img" alt="header">
-  </p>
-  <h1><i class="fas fa-list-check"></i> To-Do Meriah <i class="fas fa-star" style="color: #f1b24a;"></i></h1>
-  <div style="text-align: center;">
-    <span class="subhead"><i class="fas fa-calendar-alt" style="margin-right: 8px;"></i> Yuk kelola tugas dengan gaya!</span>
-  </div>
-  <div class="input-group">
-    <input type="text" id="todo-input" placeholder="Tulis tugas baru ..." />
-    <div class="btn-group">
-      <button id="add-btn"><i class="fas fa-plus-circle"></i> Tambah</button>
-      <button id="clear-btn"><i class="fas fa-trash-alt"></i> Clear</button>
+
+  <!-- HEADER DENGAN EFFECT GLOW -->
+  <div class="header-wrapper">
+    <p align="center">
+      <img src="https://raw.githubusercontent.com/kongali1720/KongWallet-Payment-Gateway-API/main/kop_surat.jpg" width="100%" class="header-img" alt="header">
+    </p>
+    
+    <!-- DECORATIVE ELEMENTS -->
+    <div class="header-decoration">
+      <span class="sparkle">✦</span>
+      <span class="sparkle">✦</span>
+      <span class="sparkle">✦</span>
     </div>
   </div>
-  <div class="stats">
-    <span><i class="fas fa-tasks" style="margin-right: 6px; color:#cb8b4b;"></i> Total: <span id="total-count">0</span></span>
-    <span><i class="fas fa-check-circle" style="margin-right: 6px; color:#3d8b3d;"></i> Selesai: <span id="done-count">0</span></span>
+
+  <!-- TITLE DENGAN ANIMASI -->
+  <h1>
+    <i class="fas fa-list-check"></i> 
+    <span class="gradient-text">To-Do Meriah</span>
+    <i class="fas fa-star" style="color: #f1b24a; animation: spin 3s linear infinite;"></i>
+  </h1>
+  
+  <div style="text-align: center;">
+    <span class="subhead">
+      <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i> 
+      <span id="date-display"></span>
+    </span>
   </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-wrapper">
+    <div class="progress-label">
+      <span>Progress</span>
+      <span id="progress-percent">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div id="progress-fill" class="progress-fill" style="width: 0%;"></div>
+    </div>
+  </div>
+
+  <!-- INPUT GROUP DENGAN ANIMASI -->
+  <div class="input-group">
+    <input type="text" id="todo-input" placeholder="✍️ Tulis tugas baru ..." />
+    <div class="btn-group">
+      <button id="add-btn" class="btn-primary">
+        <i class="fas fa-plus-circle"></i> Tambah
+      </button>
+      <button id="clear-btn" class="btn-danger">
+        <i class="fas fa-trash-alt"></i> Clear
+      </button>
+    </div>
+  </div>
+
+  <!-- STATISTIK DENGAN ICON BERGERAK -->
+  <div class="stats">
+    <span class="stat-item">
+      <i class="fas fa-tasks stat-icon"></i> 
+      Total: <span id="total-count" class="stat-number">0</span>
+    </span>
+    <span class="stat-item">
+      <i class="fas fa-check-circle stat-icon" style="color: #4CAF50;"></i> 
+      Selesai: <span id="done-count" class="stat-number">0</span>
+    </span>
+    <span class="stat-item">
+      <i class="fas fa-clock stat-icon" style="color: #FF9800;"></i> 
+      Pending: <span id="pending-count" class="stat-number">0</span>
+    </span>
+  </div>
+
+  <!-- TODO LIST DENGAN ANIMASI -->
   <ul id="todo-list"></ul>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Made with <i class="fas fa-heart" style="color: #ff6b6b; animation: heartbeat 1.5s infinite;"></i> by <strong>Kongali1720</strong></p>
+    <p class="footer-small">✨ Scan like a ghost, strike like a hammer ✨</p>
+  </div>
 </div>
+
+<!-- JavaScript Modules -->
 <script type="module" src="js/app.js"></script>
+
+<!-- Tambahan script untuk date & progress -->
+<script>
+  // Display current date
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('date-display').textContent = new Date().toLocaleDateString('id-ID', options);
+</script>
+
 </body>
 </html>
