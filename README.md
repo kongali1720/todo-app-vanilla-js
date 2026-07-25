@@ -117,13 +117,29 @@ HTML5 • CSS3 • Vanilla JavaScript • LocalStorage • ESLint • Prettier
 
 <hr />
 
-<h2>📂 Struktur Project</h2>
+## 📂 Project Structure
 
 ```text
 todo-app-vanilla-js/
-├── index.html
+├── .editorconfig
+├── .eslintignore
+├── .gitignore
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   ├── workflows/
+│   ├── FUNDING.yml
+│   ├── dependabot.yml
+│   └── pull_request_template.md
+├── .nvmrc
+├── .prettierignore
+├── .prettierrc
+├── LICENSE
+├── README.md
+├── assets/
 ├── css/
 │   └── style.css
+├── eslint.config.js
+├── index.html
 ├── js/
 │   ├── app.js
 │   ├── events.js
@@ -131,9 +147,7 @@ todo-app-vanilla-js/
 │   ├── todo.js
 │   ├── ui.js
 │   └── utils.js
-├── package.json
-├── LICENSE
-└── README.md
+└── package.json
 ```
 
 <hr />
