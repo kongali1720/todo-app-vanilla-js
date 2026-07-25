@@ -59,7 +59,6 @@ export function updateFilters() {
         btn.addEventListener('click', () => {
             buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            // Filter logic di events.js
             const event = new CustomEvent('filter-change', { detail: { filter: btn.dataset.filter } });
             document.dispatchEvent(event);
         });
@@ -77,4 +76,35 @@ export function debounce(fn, delay = 300) {
         clearTimeout(timer);
         timer = setTimeout(() => fn.apply(this, args), delay);
     };
+}
+
+// ===== JAM & TANGGAL =====
+export function startClock() {
+    const clockDisplay = document.getElementById('clock-display');
+    if (!clockDisplay) return;
+
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        clockDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+}
+
+export function updateDate() {
+    const dateDisplay = document.getElementById('date-display');
+    if (!dateDisplay) return;
+
+    const now = new Date();
+    const options = { 
+        weekday: 'long', 
+        day: 'numeric', 
+        month: 'long', 
+        year: 'numeric' 
+    };
+    dateDisplay.textContent = now.toLocaleDateString('id-ID', options);
 }

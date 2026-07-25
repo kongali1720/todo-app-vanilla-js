@@ -6,28 +6,39 @@
     <title>To-Do List Pro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#0d1117" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 </head>
 <body>
 
     <div class="container">
 
         <!-- HEADER -->
-        <p align="center">
+        <div class="header-center">
             <img src="https://raw.githubusercontent.com/kongali1720/KongWallet-Payment-Gateway-API/main/kop_surat.jpg" width="100%" class="header-img" alt="header">
-        </p>
-
-        <!-- TITLE -->
-        <div class="title">
-            <i class="fas fa-list-check"></i> To-Do List Pro
-            <span class="badge-pro">PRO</span>
         </div>
-        <div class="subtitle">
-            <i class="fas fa-calendar-alt"></i> <span id="date-display"></span>
+
+        <!-- TITLE CENTER -->
+        <div class="title-center">
+            <h1 class="main-title">
+                <i class="fas fa-list-check"></i> To-Do List
+                <span class="badge-pro">PRO</span>
+            </h1>
+            <p class="subtitle-center">
+                <i class="fas fa-calendar-alt"></i> Yuk kelola tugas dengan gaya!
+            </p>
+        </div>
+
+        <!-- JAM + KALENDER -->
+        <div class="datetime-wrapper">
+            <div class="clock-box">
+                <i class="fas fa-clock"></i>
+                <span id="clock-display">00:00:00</span>
+            </div>
+            <div class="date-box">
+                <i class="fas fa-calendar-day"></i>
+                <span id="date-display">Loading...</span>
+            </div>
         </div>
 
         <!-- FILTER -->
@@ -88,7 +99,7 @@
 
     </div>
 
-    <!-- Service Worker Registration -->
+    <!-- Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
