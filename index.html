@@ -3,23 +3,475 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>To-Do App Vanilla JS</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>✨ To-Do List  ✨</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      /* LATAR BELAKANG HITAM PEKAT */
+      background: #0a0a0a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 550px;
+      width: 100%;
+      background: rgba(30, 30, 30, 0.92);
+      backdrop-filter: blur(6px);
+      padding: 30px 25px;
+      border-radius: 60px 60px 40px 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 4px #333 inset;
+      transition: all 0.3s ease;
+      border: 2px solid #444;
+    }
+
+    /* HEADER ASLI DARI GITHUB */
+    .header-img {
+      display: block;
+      width: 100%;
+      border-radius: 40px 40px 20px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+      border: 3px solid #ffd700;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f5e6d3;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    h1 i {
+      color: #f7b731;
+      font-size: 2rem;
+      filter: drop-shadow(0 4px 6px #f1a73e);
+    }
+
+    .subhead {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #ccc;
+      background: #222;
+      display: inline-block;
+      padding: 6px 24px;
+      border-radius: 60px;
+      margin: 0 auto 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      border: 1px solid #555;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      background: #1c1c1c;
+      padding: 10px 12px;
+      border-radius: 120px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+      border: 2px solid #3a3a3a;
+    }
+
+    #todo-input {
+      flex: 1;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 60px;
+      outline: none;
+      font-size: 1rem;
+      background: transparent;
+      font-weight: 500;
+      color: #f0f0f0;
+      min-width: 140px;
+    }
+
+    #todo-input::placeholder {
+      color: #888;
+      font-weight: 300;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 60px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #2a2a2a;
+      color: #eee;
+      border: 1px solid #444;
+    }
+
+    button i {
+      font-size: 1rem;
+    }
+
+    button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 14px rgba(255, 215, 0, 0.2);
+    }
+
+    #add-btn {
+      background: #f7b731;
+      color: #1a1a1a;
+      border: 1px solid #f9b74b;
+      font-weight: 700;
+    }
+
+    #add-btn i {
+      color: #1a1a1a;
+    }
+
+    #clear-btn {
+      background: #3a2a2a;
+      color: #e0b0a0;
+      border: 1px solid #5a3a3a;
+    }
+
+    #clear-btn i {
+      color: #d48a6a;
+    }
+
+    #clear-btn:hover {
+      background: #4a3030;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 6px 12px 6px;
+      font-size: 0.9rem;
+      color: #bbb;
+      font-weight: 500;
+      border-bottom: 2px dashed #3a3a3a;
+      margin-bottom: 18px;
+    }
+
+    .stats span {
+      background: #1c1c1c;
+      padding: 4px 14px;
+      border-radius: 40px;
+      box-shadow: inset 0 1px 4px rgba(0,0,0,0.3);
+      border: 1px solid #333;
+    }
+
+    #todo-list {
+      list-style: none;
+      max-height: 340px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    #todo-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      background: #1e1e1e;
+      border: 2px solid #333;
+      border-radius: 80px;
+      margin-bottom: 10px;
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    #todo-list li:hover {
+      background: #282828;
+      border-color: #555;
+      transform: scale(1.01);
+    }
+
+    #todo-list li span {
+      flex: 1;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #e8e0d8;
+      padding: 4px 0;
+      word-break: break-word;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #todo-list li span i {
+      color: #dba16a;
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    #todo-list li.completed span {
+      text-decoration: line-through;
+      color: #777;
+      opacity: 0.7;
+    }
+
+    #todo-list li.completed span i {
+      color: #6f9e6f;
+    }
+
+    .delete-btn {
+      background: transparent;
+      color: #bd6b4b;
+      font-size: 1.3rem;
+      padding: 6px 12px;
+      border-radius: 40px;
+      border: 1px solid transparent;
+      transition: 0.2s;
+    }
+
+    .delete-btn i {
+      transition: 0.2s;
+    }
+
+    .delete-btn:hover {
+      background: #2a1a1a;
+      border-color: #6a3a2a;
+      color: #d48a6a;
+    }
+
+    .empty-message {
+      text-align: center;
+      padding: 32px 10px;
+      color: #888;
+      font-size: 1rem;
+      background: #181818;
+      border-radius: 120px;
+      border: 2px dashed #333;
+    }
+
+    .empty-message i {
+      font-size: 2.2rem;
+      color: #555;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* Scroll */
+    #todo-list::-webkit-scrollbar {
+      width: 7px;
+    }
+    #todo-list::-webkit-scrollbar-track {
+      background: #1a1a1a;
+      border-radius: 16px;
+    }
+    #todo-list::-webkit-scrollbar-thumb {
+      background: #444;
+      border-radius: 16px;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 16px;
+      }
+      h1 { font-size: 1.8rem; }
+      .input-group { border-radius: 40px; }
+    }
+  </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>To-Do List Sederhana</h1>
+<div class="container">
 
-    <div class="input-group">
-      <input type="text" id="todo-input" placeholder="Tambah tugas..." />
-      <button id="add-btn">Tambah</button>
-      <button id="clear-btn">Clear All</button>
-    </div>
+  <!-- HEADER ASLI DARI GITHUB (menggunakan link RAW) -->
+  <p align="center">
+    <img src="https://raw.githubusercontent.com/kongali1720/KongWallet-Payment-Gateway-API/main/kop_surat.jpg" width="100%" class="header-img" alt="header">
+  </p>
 
-    <ul id="todo-list"></ul>
+  <h1>
+    <i class="fas fa-list-check"></i> 
+    To-Do Meriah 
+    <i class="fas fa-star" style="color: #f1b24a;"></i>
+  </h1>
+  <div style="text-align: center;">
+    <span class="subhead"><i class="fas fa-calendar-alt" style="margin-right: 8px;"></i> Yuk kelola tugas dengan gaya!</span>
   </div>
 
-  <script src="script.js"></script>
+  <div class="input-group">
+    <input type="text" id="todo-input" placeholder="Tulis tugas baru ..." />
+    <div class="btn-group">
+      <button id="add-btn"><i class="fas fa-plus-circle"></i> Tambah</button>
+      <button id="clear-btn"><i class="fas fa-trash-alt"></i> Clear</button>
+    </div>
+  </div>
+
+  <!-- Statistik interaktif -->
+  <div class="stats">
+    <span><i class="fas fa-tasks" style="margin-right: 6px; color:#cb8b4b;"></i> Total: <span id="total-count">0</span></span>
+    <span><i class="fas fa-check-circle" style="margin-right: 6px; color:#3d8b3d;"></i> Selesai: <span id="done-count">0</span></span>
+  </div>
+
+  <ul id="todo-list"></ul>
+</div>
+
+<script>
+  (function() {
+    const todoInput = document.getElementById('todo-input');
+    const addBtn = document.getElementById('add-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const todoList = document.getElementById('todo-list');
+    const totalSpan = document.getElementById('total-count');
+    const doneSpan = document.getElementById('done-count');
+
+    let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+    function renderTodos() {
+      todoList.innerHTML = '';
+      const total = todos.length;
+      const done = todos.filter(t => t.completed).length;
+
+      totalSpan.textContent = total;
+      doneSpan.textContent = done;
+
+      if (total === 0) {
+        todoList.innerHTML = `
+          <div class="empty-message">
+            <i class="fas fa-face-smile-wink"></i>
+            Belum ada tugas, ayo tambahkan! 🚀
+          </div>
+        `;
+        return;
+      }
+
+      todos.forEach((todo, index) => {
+        const li = document.createElement('li');
+        if (todo.completed) li.classList.add('completed');
+
+        const span = document.createElement('span');
+        const icon = document.createElement('i');
+        icon.className = todo.completed ? 'fas fa-check-circle' : 'far fa-circle';
+        icon.style.color = todo.completed ? '#479f47' : '#dba16a';
+        span.appendChild(icon);
+
+        const textNode = document.createTextNode(' ' + todo.text);
+        span.appendChild(textNode);
+
+        span.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleTodo(index);
+        });
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.innerHTML = '<i class="fas fa-trash-can"></i>';
+        deleteBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          deleteTodo(index);
+        });
+
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
+        todoList.appendChild(li);
+      });
+    }
+
+    function saveToLocalStorage() {
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    function addTodo() {
+      const text = todoInput.value.trim();
+      if (text === '') {
+        todoInput.style.border = '2px solid #e0754a';
+        todoInput.style.background = '#2a1a1a';
+        setTimeout(() => {
+          todoInput.style.border = 'none';
+          todoInput.style.background = 'transparent';
+        }, 400);
+        return;
+      }
+
+      todos.push({ text: text, completed: false });
+      todoInput.value = '';
+      todoInput.focus();
+      saveToLocalStorage();
+      renderTodos();
+      addBtn.style.transform = 'scale(0.95)';
+      setTimeout(() => addBtn.style.transform = 'scale(1)', 120);
+    }
+
+    function toggleTodo(index) {
+      todos[index].completed = !todos[index].completed;
+      saveToLocalStorage();
+      renderTodos();
+    }
+
+    function deleteTodo(index) {
+      todos.splice(index, 1);
+      saveToLocalStorage();
+      renderTodos();
+    }
+
+    function clearAllTodos() {
+      if (todos.length === 0) return;
+      if (confirm('🧹 Hapus semua tugas? Yuk mulai dari awal!')) {
+        todos = [];
+        saveToLocalStorage();
+        renderTodos();
+        clearBtn.style.background = '#4a3030';
+        setTimeout(() => clearBtn.style.background = '#3a2a2a', 200);
+      }
+    }
+
+    addBtn.addEventListener('click', addTodo);
+
+    todoInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addTodo();
+      }
+    });
+
+    clearBtn.addEventListener('click', clearAllTodos);
+
+    todoInput.addEventListener('focus', () => {
+      todoInput.parentElement.style.boxShadow = '0 0 0 4px #f7cba0';
+    });
+    todoInput.addEventListener('blur', () => {
+      todoInput.parentElement.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.6)';
+    });
+
+    renderTodos();
+  })();
+</script>
+
 </body>
 </html>
