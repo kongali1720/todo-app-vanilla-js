@@ -1,0 +1,28 @@
+name: 🐛 Bug Report
+description: Laporkan bug untuk membantu kami memperbaiki
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Deskripsi Bug
+      description: Jelaskan bug dengan jelas
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Langkah Reproduksi
+      placeholder: |
+        1. Buka halaman
+        2. Klik tombol X
+        3. Error muncul
+  - type: textarea
+    id: expected
+    attributes:
+      label: Perilaku yang Diharapkan
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshot (opsional)
